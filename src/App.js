@@ -1,21 +1,24 @@
-import logo from './logo.svg';
+
 import './App.css';
+import Editor from './Components/Editor';
+import Previsualizador from './Components/Previsualizador';
+import { useState } from 'react';
+
+let marked = require("marked");
 
 function App() {
+  const [entrada, setEntrada] = useState("");
+    
+    let cambio = (e) =>{
+        setEntrada(e.target.value)
+        console.log(e.target.value,marked.parse(e.target.value))
+    }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1>Proyecto Git</h1>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="contenedor">
+        <Editor cambio={cambio}></Editor>
+        <Previsualizador mensaje={entrada}></Previsualizador>
+      </div>  
     </div>
   );
 }
